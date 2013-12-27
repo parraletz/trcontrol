@@ -102,11 +102,11 @@ SUIT_CONFIG = {
 }
 
 
-#try:
-#    from development import *
-#    INSTALLED_APPS += DEVEL_APPS
-#except ImportError, exp:
-#    from production import *
+try:
+    from development import *
+    INSTALLED_APPS += DEVEL_APPS
+except ImportError, exp:
+    from production import *
 
 
 

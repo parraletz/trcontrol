@@ -3,3 +3,4 @@ historial/migrations/*
 *.sqlite3
 *.swp
 .idea
+development.py
