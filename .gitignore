@@ -1,0 +1,5 @@
+*.pyc
+historial/migrations/*
+*.sqlite3
+*.swp
+.idea
