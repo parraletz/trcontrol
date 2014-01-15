@@ -17,6 +17,14 @@ PRODUCTO_CHOICE = (
     ('PAC', 'PAC'),
 )
 
+TIPO_CHOICE = (
+    ('HI', 'Historia'),
+    ('BU', 'Bug'),
+    ('SC', 'Sugerencia del cliente'),
+    ('CT', 'Chore - Task '),
+    ('RP', 'Requisicion de Proyecto'),
+)
+
 class Componente(models.Model):
     componente  = models.CharField(max_length=25, null=False, unique=True)
     version     = models.CharField(max_length=10)
@@ -35,6 +43,7 @@ class Bug(models.Model):
     status = models.CharField(choices=STATUS_CHOICE, max_length=10, null=False)
     componente = models.ForeignKey(Componente)
     producto    = models.CharField(choices=PRODUCTO_CHOICE, max_length=25, null=False)
+    tipo = models.CharField(max_length=50,choices=TIPO_CHOICE)
     observaciones = models.TextField(max_length=1024)
 
     def __str__(self):
