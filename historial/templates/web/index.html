@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block loginbar %}
+
+<div id="user-tools">
+                
+                <span class="user-links">
+                
+                  
+                  
+    <a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
+               
+        </div>
+
+
+
+{% endblock %}
+
+{% block content%}
+
+
+
+  {% if user.is_authenticated %}
+    {{ msg }}
+
+  {% endif %}
+
+{% endblock %}

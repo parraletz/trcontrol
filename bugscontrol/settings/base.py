@@ -18,10 +18,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-9#98g!083ucdu!2kxbo$b6va!(4y$4)l2r)i!dr^my37c@rd)'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -45,6 +41,7 @@ INSTALLED_APPS = (
     'south',
     'import_export',
     'django_extensions',
+    'social_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -93,6 +90,7 @@ STATIC_URL = '/static/'
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_by_type_backends',
 )
 
 
@@ -102,11 +100,43 @@ SUIT_CONFIG = {
 }
 
 
+# Authentication backends 
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'django.contrib.auth.backends.ModelBackend', 
+)
+
+
+# Configuracion social_auth 
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('google')
+
+GOOGLE_OAUTH2_CLIENT_ID      = '1016720589300-vjh0itn1g3nl93hip1781umf1fn1jquj.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'NNmgTFVvS60tjhbG_Fhbo0rI'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_ERROR_URL = '/'
+
+
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+
+USE_SOCIAL_AUTH_AS_ADMIN_LOGIN = True
+
 try:
     from development import *
     INSTALLED_APPS += DEVEL_APPS
 except ImportError, exp:
     from production import *
-
 
 
